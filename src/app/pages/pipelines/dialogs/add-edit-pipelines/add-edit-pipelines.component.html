@@ -1,0 +1,75 @@
+<h2 mat-dialog-title>Add New Pipeline</h2>
+<mat-dialog-content class="mat-typography">
+
+  <!-- NAME -->
+  <div class="row mb-6">
+    <label class="col-lg-4 col-form-label required fw-bold fs-6"
+      >Pipeline Name</label
+    >
+    <div class="col-lg-8 fv-row">
+      <input
+        type="text"
+        class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0
+        "
+        placeholder="Pipeline Name"
+      />
+    </div>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="row mb-6">
+    <label class="col-lg-4 col-form-label fw-bold fs-6"
+      >Description</label
+    >
+    <div class="col-lg-8 fv-row">
+      <input
+        type="text"
+        class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0
+        "
+        placeholder="Description"
+      />
+    </div>
+  </div>
+
+  <!-- Git Repository -->
+  <div class="row mb-6">
+    <label class="col-lg-4 col-form-label required fw-bold fs-6"
+      >Git Repository <span>- Required</span></label
+    >
+    <div class="col-lg-8 fv-row">
+      <input
+        type="text"
+        class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0
+        "
+        placeholder="Git repo"
+      />
+    </div>
+  </div>
+
+   <!-- ENV Variable -->
+   <div class="row mb-6">
+    <label class="col-lg-4 col-form-label fw-bold fs-6"
+      >Environment Variables</label
+    >
+    <div class="col-lg-8 fv-row">
+      <input
+        type="text"
+        class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0
+        "
+        placeholder="Env. variables"
+      />
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Add New Pipeline</button>
+</mat-dialog-actions>

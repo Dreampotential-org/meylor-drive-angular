@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Add New User</h2>
+<mat-dialog-content class="mat-typography">
+
+  <!-- Email -->
+  <div class="row mb-6">
+    <label class="col-lg-3 col-form-label required fw-bold fs-6"
+      >Email</label
+    >
+    <div class="col-lg-9 fv-row">
+      <input
+        type="text"
+        class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0
+        "
+        placeholder="Email"
+      />
+    </div>
+  </div>
+
+  <!-- Role -->
+  <div class="row mb-6">
+    <label class="col-lg-3 col-form-label fw-bold fs-6"
+      >Role</label
+    >
+    <div class="col-lg-9 fv-row">
+        <select
+        class="form-select form-select-solid form-select-lg fw-bold"
+      >
+        <option value="">Select a Role...</option>
+        <option value="1">Administrator</option>
+        <option value="2">Moderator</option>
+      </select>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Add New User</button>
+</mat-dialog-actions>
