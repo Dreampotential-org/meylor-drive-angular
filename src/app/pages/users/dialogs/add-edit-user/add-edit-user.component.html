@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{editMode ? 'Update': 'Add New'}} User</h2>
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="addEditForm">
+    <!-- NAME -->
+    <div class="row mb-6">
+      <label class="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
+      <div class="col-lg-8 fv-row">
+        <input type="text" class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0
+        " formControlName="name" placeholder="Name" />
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="row mb-6">
+      <label class="col-lg-4 col-form-label required fw-bold fs-6">Email</label>
+      <div class="col-lg-8 fv-row">
+        <input type="text" class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0
+        " formControlName="email" placeholder="Email" />
+      </div>
+    </div>
+
+     <!-- Password -->
+     <div class="row mb-6" *ngIf="!editMode">
+      <label class="col-lg-4 col-form-label required fw-bold fs-6">Password</label>
+      <div class="col-lg-8 fv-row">
+        <input type="password" class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0
+        " formControlName="password" placeholder="Password" />
+      </div>
+    </div>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [disabled]="addEditForm.invalid" (click)="editMode? updateUser():createNewUser()">{{editMode ? 'Update': 'Add New'}} User</button>
+</mat-dialog-actions>

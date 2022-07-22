@@ -4,6 +4,7 @@
 
 export const environment = {
   production: true,
+  baseUrl: 'https://meylorci-api.dreampotential.org/',
   appVersion: 'v8.0.38',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,

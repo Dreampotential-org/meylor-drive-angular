@@ -6,6 +6,8 @@ import { AuthModel } from '../models/auth.model';
 import { AuthHTTPService } from './auth-http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { apiUrls } from 'src/app/constants/apiUrls';
 
 export type UserType = UserModel | undefined;
 
@@ -33,7 +35,8 @@ export class AuthService implements OnDestroy {
 
   constructor(
     private authHttpService: AuthHTTPService,
-    private router: Router
+    private router: Router,
+    private httpClient: HttpClient
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.currentUserSubject = new BehaviorSubject<UserType>(undefined);
@@ -61,6 +64,7 @@ export class AuthService implements OnDestroy {
   }
 
   logout() {
+    localStorage.clear()
     localStorage.removeItem(this.authLocalStorageToken);
     this.router.navigate(['/auth/login'], {
       queryParams: {},
@@ -133,6 +137,16 @@ export class AuthService implements OnDestroy {
       console.error(error);
       return undefined;
     }
+  }
+
+  registerNewUser(userObj = {}): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.httpClient.post(environment.baseUrl + apiUrls.register, userObj);
+  }
+
+  signinUser(userObj = {}): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.httpClient.post(environment.baseUrl + apiUrls.login, userObj);
   }
 
   ngOnDestroy() {

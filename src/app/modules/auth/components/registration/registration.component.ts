@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { ConfirmPasswordValidator } from './confirm-password.validator';
 import { UserModel } from '../../models/user.model';
 import { first } from 'rxjs/operators';
+import { localHostKeys } from 'src/app/constants/localhostKeys';
 
 @Component({
   selector: 'app-registration',
@@ -44,7 +45,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   initForm() {
     this.registrationForm = this.fb.group(
       {
-        fullname: [
+        name: [
           '',
           Validators.compose([
             Validators.required,
@@ -53,7 +54,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
           ]),
         ],
         email: [
-          'qwe@qwe.qwe',
+          '',
           Validators.compose([
             Validators.required,
             Validators.email,
@@ -87,19 +88,14 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   submit() {
     this.hasError = false;
-    const result: {
-      [key: string]: string;
-    } = {};
-    Object.keys(this.f).forEach((key) => {
-      result[key] = this.f[key].value;
-    });
-    const newUser = new UserModel();
-    newUser.setUser(result);
+    const userObj = this.registrationForm.value;
     const registrationSubscr = this.authService
-      .registration(newUser)
+      .registerNewUser(userObj)
       .pipe(first())
-      .subscribe((user: UserModel) => {
+      .subscribe((user: any) => {
+        this.authService.isLoadingSubject.next(false);
         if (user) {
+          localStorage.setItem(localHostKeys.token, user.token);
           this.router.navigate(['/']);
         } else {
           this.hasError = true;
