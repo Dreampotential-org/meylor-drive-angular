@@ -6,6 +6,7 @@ import { InlineSVGModule } from 'ng-inline-svg-2';
 import { AddEditUserComponent } from './dialogs/add-edit-user/add-edit-user.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,12 +20,17 @@ import { MatButtonModule } from '@angular/material/button';
     InlineSVGModule,
     MatDialogModule,
     MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '',
         component: UsersComponent,
       }
     ]),
+  ],
+  entryComponents: [
+    AddEditUserComponent
   ]
 })
 export class UsersModule { }

@@ -35,23 +35,22 @@
           <tr class="fw-bolder text-muted">
             <th class="min-w-150px">Name</th>
             <th class="min-w-150px">Status</th>
-            <th class="min-w-140px">Build</th>
-            <th class="min-w-120px">Logs</th>
-            <th class="min-w-100px text-end">Favorites</th>
+            <th class="min-w-140px">Repo</th>
+            <th class="min-w-100px text-end">Actions</th>
           </tr>
         </thead>
         <!-- end::Table head -->
         <!-- begin::Table body -->
         <tbody>
-          <tr>
+          <tr *ngFor="let item of pipelines; let i=index">
             <td>
               <div class="d-flex align-items-center">
                 <div class="d-flex justify-content-start flex-column">
                   <a  class="text-dark fw-bolder text-hover-primary fs-6">
-                    Production
+                    {{item.name}}
                   </a>
                   <span class="text-muted fw-bold text-muted d-block fs-7">
-                    Deployment of project
+                    {{item.description}}
                   </span>
                 </div>
               </div>
@@ -61,27 +60,17 @@
                 
                 class="text-dark fw-bolder text-hover-primary d-block fs-6"
               >
-                Scheduled
+                {{item.status}}
               </a>
-              <span class="text-muted fw-bold text-muted d-block fs-7">
-                After few days
-              </span>
             </td>
-            <td class="text-end">
-              <div class="d-flex flex-column w-100 me-2">
-                <div class="d-flex flex-stack mb-2">
-                  <span class="text-muted me-2 fs-7 fw-bold">50%</span>
-                </div>
-                <div class="progress h-6px w-100">
-                  <div
-                    class="progress-bar bg-primary"
-                    role="progressbar"
-                    [style.width]="'50%'"
-                  ></div>
-                </div>
-              </div>
+            <td>
+              <a
+                
+                class="text-dark fw-bolder text-hover-primary d-block fs-6"
+              >
+                {{item.repo}}
+              </a>
             </td>
-            <td></td>
             <td>
               <div class="d-flex justify-content-end flex-shrink-0">
                 <a
@@ -89,11 +78,22 @@
                   class="
                     btn btn-icon btn-bg-light btn-active-color-primary btn-sm
                     me-1
-                  "
+                  " (click)="createPipeline(item)"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/icons/duotune/art/art005.svg'"
+                    class="svg-icon svg-icon-3"
+                  ></span>
+                </a>
+                <a
+                  
+                  class="
+                    btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                  " (click)="deletePipeline(item.id, i)"
                 >
                   <span
                     [inlineSVG]="
-                      './assets/media/icons/duotune/general/gen020.svg'
+                      './assets/media/icons/duotune/general/gen027.svg'
                     "
                     class="svg-icon svg-icon-3"
                   ></span>

@@ -1,75 +1,95 @@
-<h2 mat-dialog-title>Add New Pipeline</h2>
+<h2 mat-dialog-title>{{editMode ? 'Update': 'Add New'}} Pipeline</h2>
 <mat-dialog-content class="mat-typography">
 
-  <!-- NAME -->
-  <div class="row mb-6">
-    <label class="col-lg-4 col-form-label required fw-bold fs-6"
-      >Pipeline Name</label
-    >
-    <div class="col-lg-8 fv-row">
-      <input
-        type="text"
-        class="
+  <form [formGroup]="addEditForm">
+    <!-- NAME -->
+    <div class="row mb-6">
+      <label class="col-lg-4 col-form-label required fw-bold fs-6">Pipeline Name</label>
+      <div class="col-lg-8 fv-row">
+        <input type="text" class="
           form-control form-control-lg form-control-solid
           mb-3 mb-lg-0
-        "
-        placeholder="Pipeline Name"
-      />
+        " formControlName="name" placeholder="Pipeline Name" />
+      </div>
     </div>
-  </div>
 
-  <!-- DESCRIPTION -->
-  <div class="row mb-6">
-    <label class="col-lg-4 col-form-label fw-bold fs-6"
-      >Description</label
-    >
-    <div class="col-lg-8 fv-row">
-      <input
-        type="text"
-        class="
+    <!-- DESCRIPTION -->
+    <div class="row mb-6">
+      <label class="col-lg-4 col-form-label fw-bold required fs-6">Description</label>
+      <div class="col-lg-8 fv-row">
+        <input type="text" class="
           form-control form-control-lg form-control-solid
           mb-3 mb-lg-0
-        "
-        placeholder="Description"
-      />
+        " formControlName="description" placeholder="Description" />
+      </div>
     </div>
-  </div>
 
-  <!-- Git Repository -->
-  <div class="row mb-6">
-    <label class="col-lg-4 col-form-label required fw-bold fs-6"
-      >Git Repository <span>- Required</span></label
-    >
-    <div class="col-lg-8 fv-row">
-      <input
-        type="text"
-        class="
+    <!-- Git Repository -->
+    <div class="row mb-6">
+      <label class="col-lg-4 col-form-label required fw-bold fs-6">Git Repository <span></span></label>
+      <div class="col-lg-8 fv-row">
+        <input type="text" class="
           form-control form-control-lg form-control-solid
           mb-3 mb-lg-0
-        "
-        placeholder="Git repo"
-      />
+        " formControlName="repo" placeholder="Git repo" />
+      </div>
     </div>
-  </div>
 
-   <!-- ENV Variable -->
-   <div class="row mb-6">
-    <label class="col-lg-4 col-form-label fw-bold fs-6"
-      >Environment Variables</label
-    >
-    <div class="col-lg-8 fv-row">
-      <input
-        type="text"
-        class="
+    <!-- Status -->
+    <div class="row mb-6">
+      <label class="col-lg-4 col-form-label required fw-bold fs-6">Status <span></span></label>
+      <div class="col-lg-8 fv-row">
+        <input type="text" class="
           form-control form-control-lg form-control-solid
           mb-3 mb-lg-0
-        "
-        placeholder="Env. variables"
-      />
+        " formControlName="status" placeholder="Status" />
+      </div>
     </div>
-  </div>
+
+    <!-- ENV Variable -->
+    <div class="column mb-6" formArrayName="environmentVariable">
+      <label class="col-form-label fw-bold fs-6 d-flex align-items-center">Environment Variables 
+        <div
+          class="card-toolbar mx-3"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-trigger="hover"
+          title="Click to add a Environment Variable"
+        >
+          <a class="btn btn-sm btn-light-primary" (click)="addNewVariable()">
+            <span
+              [inlineSVG]="'./assets/media/icons/duotune/arrows/arr075.svg'"
+              class="svg-icon svg-icon-3"
+            ></span>
+            New Environment Variable
+          </a>
+        </div>
+      </label>
+      <div class="fv-row d-flex align-items-center mb-2" *ngFor="let item of envVariablesFormArray.controls; let i=index" [formGroupName]="i">
+        <input type="text" class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0
+        " placeholder="Name - (required)" formControlName="envName" />
+        <input type="text" class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0 mx-2
+        " placeholder="Value - (required)" formControlName="envValue" />
+        <div
+          class="card-toolbar"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-trigger="hover"
+          title="Click to remove this. Environment Variable"
+        >
+          <a class="btn btn-sm btn-light-primary" (click)="removeEnvVariable(i)">
+            Remove
+          </a>
+        </div>
+      </div>
+    </div>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Add New Pipeline</button>
+  <button mat-button [disabled]="addEditForm.invalid" (click)="editMode? updatePipeline():createNewPipeline()">{{editMode ? 'Update': 'Add New'}} Pipeline</button>
 </mat-dialog-actions>

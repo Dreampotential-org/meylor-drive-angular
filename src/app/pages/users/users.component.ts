@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { apiUrls } from 'src/app/constants/apiUrls';
+import { ApiService } from 'src/app/services/api-service.service';
 import { AddEditUserComponent } from './dialogs/add-edit-user/add-edit-user.component';
 
 @Component({
@@ -9,16 +11,37 @@ import { AddEditUserComponent } from './dialogs/add-edit-user/add-edit-user.comp
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  usersListing = [] as any;
+
+  constructor(private dialog: MatDialog, private apiService: ApiService, private changeDetectionRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.fetchUsersListing();
   }
 
-  createUser() {
-    const dialogRef = this.dialog.open(AddEditUserComponent, {
-      width: '500px'
+  fetchUsersListing() {
+    this.apiService.getCall(apiUrls.usersListing)
+    .subscribe((res: any) => {
+      this.usersListing = res;
+      this.changeDetectionRef.detectChanges();
     });
-    dialogRef.afterClosed().subscribe(result => {
+  }
+
+  createUser(obj = {}) {
+    const dialogRef = this.dialog.open(AddEditUserComponent, {
+      width: '500px',
+      data: obj
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      result && this.fetchUsersListing();
+    });
+  }
+
+  deleteUser(id: any, index: any) {
+    this.apiService.deleteCall(apiUrls.deleteUser + id)
+    .subscribe((res: any) => {
+      this.usersListing.splice(index, 1);
+      this.changeDetectionRef.detectChanges();
     });
   }
 
