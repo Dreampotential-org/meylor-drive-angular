@@ -17,4 +17,10 @@ export const apiUrls = {
     
     // TASKS
     tasksLookup: 'tasks/',
+
+    // SERVERS
+    serversListing: 'server/',
+    createServer: 'server/',
+    updateServer: 'server/',
+    deleteServer: 'server/',
 };
