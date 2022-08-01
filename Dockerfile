@@ -10,5 +10,4 @@ RUN npm run build
 FROM nginx:latest
 
 COPY --from=build /usr/local/app/dist/demo1 /usr/share/nginx/html
-
 EXPOSE 8081
