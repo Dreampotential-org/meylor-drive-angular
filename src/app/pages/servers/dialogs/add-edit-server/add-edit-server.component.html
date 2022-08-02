@@ -1,0 +1,85 @@
+<h2 mat-dialog-title>{{editMode ? 'Update': 'Add New'}} Server</h2>
+<mat-dialog-content class="mat-typography">
+
+    <form [formGroup]="addEditForm">
+        <!-- NAME -->
+        <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
+            <div class="col-lg-8 fv-row">
+                <input type="text" class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0
+        " formControlName="name" placeholder="Name" />
+            </div>
+        </div>
+
+        <!-- Username -->
+        <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6">Username</label>
+            <div class="col-lg-8 fv-row">
+                <input type="text" class="
+            form-control form-control-lg form-control-solid
+            mb-3 mb-lg-0
+          " formControlName="username" placeholder="Username" />
+            </div>
+        </div>
+
+        <!-- Password -->
+        <div class="row mb-6" *ngIf="!editMode">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6">Password</label>
+            <div class="col-lg-8 fv-row">
+                <input type="password" class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0
+        " formControlName="password" placeholder="Password" />
+            </div>
+        </div>
+
+        <!-- IP Address -->
+        <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6">IP Address</label>
+            <div class="col-lg-8 fv-row">
+                <input type="text" class="
+            form-control form-control-lg form-control-solid
+            mb-3 mb-lg-0
+          " formControlName="ip_address" placeholder="IP Address" />
+            </div>
+        </div>
+
+        <!-- User -->
+        <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">User</label>
+            <div class="col-lg-8 fv-row">
+                <select name="user" data-control="select2" data-hide-search="true" formControlName="user"
+                    class="form-select 
+                    form-control form-control-lg form-control-solid
+                    mb-3 mb-lg-0">
+                    <option *ngFor="let user of users" value="{{user?.id}}" selected>{{user?.email}}</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- System Specs -->
+        <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">System Specs</label>
+            <div class="col-lg-8 fv-row">
+                <select name="system_specs" formControlName="system_specs"
+                    class="form-select 
+                    form-control form-control-lg form-control-solid
+                    mb-3 mb-lg-0">
+                </select>
+            </div>
+        </div>
+
+        <!-- TOGGLES -->
+        <mat-slide-toggle formControlName="error">Error</mat-slide-toggle>
+        <mat-slide-toggle class="mx-15" formControlName="alive">Alive</mat-slide-toggle>
+        <mat-slide-toggle formControlName="in_use">In Use</mat-slide-toggle>
+
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [disabled]="addEditForm.invalid" (click)="editMode? updateServer():createNewServer()">{{editMode
+        ? 'Update': 'Add New'}} Server</button>
+</mat-dialog-actions>
