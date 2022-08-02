@@ -16,6 +16,16 @@ const Routing: Routes = [
     loadChildren: () =>
       import('./pipelines/pipelines.module').then((m) => m.PipelinesModule),
   },
+  {
+    path: 'servers',
+    loadChildren: () =>
+      import('./servers/servers.module').then((m) => m.ServersModule),
+  },
+  {
+    path: 'key-pairs',
+    loadChildren: () =>
+      import('./key-pair/key-pair.module').then((m) => m.KeyPairModule),
+  },
   // {
   //   path: 'builder',
   //   loadChildren: () =>
