@@ -1,0 +1,122 @@
+<!-- begin::Header -->
+
+<div class="card-header border-0 pt-5 d-flex align-items-center justify-content-between">
+    <h3 class="card-title align-items-start flex-column">
+      <!-- <span class="card-label fw-bolder fs-3 mb-1">Users Statistics</span> -->
+      <span class="text-muted mt-1 fw-bold fs-7">Manage your Tasks here.</span>
+    </h3>
+    <div
+      class="card-toolbar"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      data-bs-trigger="hover"
+      title="Click to add a Task"
+    >
+      <a class="btn btn-sm btn-light-primary" (click)="createTask()">
+        <span
+          [inlineSVG]="'./assets/media/icons/duotune/arrows/arr075.svg'"
+          class="svg-icon svg-icon-3"
+        ></span>
+        New Task
+      </a>
+    </div>
+  </div>
+  <!-- end::Header -->
+  <!-- begin::Body -->
+  <div class="card-body py-3">
+    <!-- begin::Table container -->
+    <div class="table-responsive">
+      <!-- begin::Table -->
+      <table
+        class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"
+      >
+        <!-- begin::Table head -->
+        <thead>
+          <tr class="fw-bolder text-muted">
+            <th class="min-w-150px">Name</th>
+            <th class="min-w-150px">Repo</th>
+            <th class="min-w-140px">Created At</th>
+            <th class="min-w-140px">Status</th>
+            <th class="min-w-100px text-end">Actions</th>
+          </tr>
+        </thead>
+        <!-- end::Table head -->
+        <!-- begin::Table body -->
+        <tbody>
+          <tr *ngFor="let item of tasks; let i=index">
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="d-flex justify-content-start flex-column">
+                  <a  class="text-dark fw-bolder text-hover-primary fs-6">
+                    {{item.name}}
+                  </a>
+                  <span class="text-muted fw-bold text-muted d-block fs-7">
+                    {{item.id}}
+                  </span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <a
+                
+                class="text-dark fw-bolder text-hover-primary d-block fs-6"
+              >
+                {{item.repo}}
+              </a>
+            </td>
+            <td>
+              <a
+                
+                class="text-dark fw-bolder text-hover-primary d-block fs-6"
+              >
+                {{item.created_at | date : 'M/d/yy, h:mm a'}}
+              </a>
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                  <div class="d-flex justify-content-start flex-column">
+                    <span class="text-muted d-block fs-7">
+                      {{item.status}}
+                    </span>
+                  </div>
+                </div>
+              </td>
+            <td>
+              <div class="d-flex justify-content-end flex-shrink-0">
+                <!-- <a
+                  
+                  class="
+                    btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                    me-1
+                  " (click)="createTask(item)"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/icons/duotune/art/art005.svg'"
+                    class="svg-icon svg-icon-3"
+                  ></span>
+                </a> -->
+                <a
+                  
+                  class="
+                    btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                  " (click)="deleteTask(item.id, i)"
+                >
+                  <span
+                    [inlineSVG]="
+                      './assets/media/icons/duotune/general/gen027.svg'
+                    "
+                    class="svg-icon svg-icon-3"
+                  ></span>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <!-- end::Table body -->
+      </table>
+      <!-- end::Table -->
+    </div>
+    <!-- end::Table container -->
+  </div>
+  <!-- begin::Body -->
+  

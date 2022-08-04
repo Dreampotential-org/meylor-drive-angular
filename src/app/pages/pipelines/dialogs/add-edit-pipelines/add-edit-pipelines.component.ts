@@ -40,7 +40,7 @@ export class AddEditPipelinesComponent implements OnInit {
         description: [null, Validators.required],
         repo: [null, Validators.required],
         environmentVariable: new FormArray([]),
-        status: [null, Validators.required],
+        status: [null],
         task: [null]
     });
     this.envVariablesFormArray = (this.addEditForm.get('environmentVariable')) as FormArray;

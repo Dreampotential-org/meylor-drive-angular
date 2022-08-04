@@ -19,7 +19,7 @@ export class AddEditKeyPairComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder, private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.fetchUsers();
+    // this.fetchUsers();
     this.initializeForm();
     if (this.data.id) {
       this.editMode = true;
@@ -31,7 +31,7 @@ export class AddEditKeyPairComponent implements OnInit {
     this.addEditForm = this.formBuilder.group({
       id: [null],
       value: [null, Validators.required],
-      user: [null, Validators.required]
+      user: [null]
     });
   }
 
