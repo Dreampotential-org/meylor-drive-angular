@@ -31,10 +31,7 @@ export class AddEditTaskComponent implements OnInit {
     this.addEditForm = this.formBuilder.group(
       {
         id: [null],
-        status: [null],
         command: [null],
-        started_at: [null],
-        finished_at: [null],
         repo: [null],
         name: [null],
         meta: [null],

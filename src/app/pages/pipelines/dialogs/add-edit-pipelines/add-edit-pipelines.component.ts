@@ -14,11 +14,13 @@ export class AddEditPipelinesComponent implements OnInit {
   addEditForm: FormGroup;
   envVariablesFormArray: FormArray;
   editMode = false;
+  tasks = [] as any;
 
   constructor(public dialog: MatDialogRef<AddEditPipelinesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder, private apiService: ApiService) { }
 
   ngOnInit(): void {
+    this.fetchTasks();
     this.initializeForm();
     if (this.data.id) {
       this.editMode = true;
@@ -85,5 +87,12 @@ export class AddEditPipelinesComponent implements OnInit {
       envVariables[this.envVariablesFormArray.controls[i].get('envName')?.value] = this.envVariablesFormArray.controls[i].get('envValue')?.value
     }
     return envVariables;
+  }
+
+  fetchTasks() {
+    this.apiService.getCall(apiUrls.tasksListing)
+    .subscribe((res: any) => {
+      this.tasks = res;
+    });
   }
 }
