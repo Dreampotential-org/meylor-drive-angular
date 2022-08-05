@@ -26,6 +26,11 @@ const Routing: Routes = [
     loadChildren: () =>
       import('./key-pair/key-pair.module').then((m) => m.KeyPairModule),
   },
+  {
+    path: 'tasks',
+    loadChildren: () =>
+      import('./tasks/tasks.module').then((m) => m.TasksModule),
+  },
   // {
   //   path: 'builder',
   //   loadChildren: () =>

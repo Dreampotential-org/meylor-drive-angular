@@ -15,12 +15,14 @@ export class AddEditServerComponent implements OnInit {
   addEditForm: FormGroup;
   editMode = false;
   users = [] as any;
+  keyPairs = [] as any;
 
   constructor(public dialog: MatDialogRef<AddEditServerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private globalService: GlobalService, private formBuilder: FormBuilder, private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.fetchUsers();
+    // this.fetchUsers();
+    this.fetchKeyPairs();
     this.initializeForm();
     if (this.data.id) {
       this.editMode = true;
@@ -44,6 +46,7 @@ export class AddEditServerComponent implements OnInit {
       alive: [false],
       in_use: [false],
       user: [null],
+      server_key: [],
       system_specs: [null]
     });
   }
@@ -68,6 +71,13 @@ export class AddEditServerComponent implements OnInit {
     this.apiService.getCall(apiUrls.usersListing)
     .subscribe((res: any) => {
       this.users = res;
+    });
+  }
+
+  fetchKeyPairs() {
+    this.apiService.getCall(apiUrls.keyPairListing)
+    .subscribe((res: any) => {
+      this.keyPairs = res;
     });
   }
 
