@@ -14,7 +14,7 @@ export const apiUrls = {
     createPipeline: 'api/pipeline/',
     updatePipeline: 'api/pipeline/',
     deletePipeline: 'api/pipeline/',
-    
+
     // TASKS
     tasksLookup: 'tasks/',
 
